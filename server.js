@@ -3,7 +3,8 @@ const errorHandler = require('./middleware/error');
 const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv')
 const path = require('path');
-
+var cors = require('cors')
+ 
 // load env variables
 
 dotenv.config({path:'./config/config.env'})
@@ -23,6 +24,9 @@ app.use(express.json());
 // sanitize Data
 
 app.use(mongoSanitize());
+app.use(cors({
+    origin: '*'
+}))
 
 app.set('views', path.join(__dirname, './public/frontend/views'))
 app.set('view engine','ejs');
