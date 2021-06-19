@@ -29,7 +29,7 @@
     <script>
         async function getDetails() {
             document.getElementById('loader').hidden = false;
-            const response = await fetch('http://localhost:5000/api/m1m2join');
+            const response = await fetch('https://shekharincubate.herokuapp.com/api/m1m2join');
             const jsonData = await response.json();
             populateTable(jsonData)
         }
