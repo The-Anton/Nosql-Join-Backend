@@ -38,28 +38,29 @@ const getCollectionJoin = (req,res) => {
                 as: "full_details"
             }
     
-   }]).exec((err,data) =>{
-        return res.json(data);
-   });
+        },
+        {
+            $replaceRoot: { 
+                newRoot: { 
+                    $mergeObjects: [ { 
+                        $arrayElemAt: [ "$full_details", 0 ] 
+                    }, "$$ROOT" ] } }
+        },
+        { 
+            $project: { full_details: 0 } 
+        }
+    ]).exec((err,data) =>{
+            return res.json(data);
+    });
        
 }
 
-// const getCollectionJoin = (req,res) => {
-//     MockOneData.aggregate([
-//         { 
-//             $unionWith: "mockseconddatas"
-//         }
-//         ,function (error, data) {
-//             return res.json(data);
-//         //handle error case also
-//    }]);
-// }
 
 
 module.exports ={
     getMockOneData,
     getMockSecondData,
-    getCollectionJoin 
+    getCollectionJoin
 }
 
 

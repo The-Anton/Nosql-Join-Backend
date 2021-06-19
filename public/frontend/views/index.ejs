@@ -42,7 +42,7 @@
 
                domChange += `<tr>
                     <th scope="row">${i}</th>
-                    <td>${jsonData[i].full_details[0].team_name}</td>
+                    <td>${jsonData[i].team_name}</td>
                     <td>${jsonData[i].email}</td>
                     <td>${jsonData[i].number}</td>
                     <td>${jsonData[i].city}</td>
@@ -57,7 +57,7 @@
             tableBody.innerHTML += domChange;
 
             document.getElementById('table').hidden = false;
-
+            
 
 
         }
