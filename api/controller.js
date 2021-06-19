@@ -56,11 +56,16 @@ const getCollectionJoin = (req,res) => {
 }
 
 
+const verify = (req,res) => {
+    res.download('./loaderio-77c7d9dc9cfa4028a37169d8f2f88462.txt');
+}
+
 
 module.exports ={
     getMockOneData,
     getMockSecondData,
-    getCollectionJoin
+    getCollectionJoin,
+    verify
 }
 
 
