@@ -1,0 +1,33 @@
+{
+  "name": "nosql-join",
+  "version": "1.0.0",
+  "description": "A backend project for performing NoSQL JOIN on MongoDB collections",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "NodeJS",
+    "MongoDB",
+    "Backend",
+    "Express"
+  ],
+  "author": "Shekhar Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^9.0.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-prettify": "^0.1.1",
+    "mongoose": "^5.12.9",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7"
+  }
+}
