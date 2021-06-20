@@ -40,22 +40,35 @@
         }
 
       // populate the json data in table and render 
-        function populateTable(jsonData) {
+      function populateTable(jsonData) {
             var tableBody = document.getElementById("tableBody");
             var domChange = " ";
-            for(var i=0; i<jsonData.length; i++){
+            for(var i=0; i<jsonData[0].length; i++){
 
                domChange += `<tr>
                     <th scope="row">${i}</th>
-                    <td>${jsonData[i].team_name}</td>
-                    <td>${jsonData[i].full_name}</td>
-                    <td>${jsonData[i].email}</td>
-                    <td>${jsonData[i].number}</td>
-                    <td>${jsonData[i].city}</td>
-                    <td>${jsonData[i].url}</td>
+                    <td>${jsonData[0][i].team_name}</td>
+                    <td>${jsonData[0][i].full_name}</td>
+                    <td>${jsonData[0][i].email}</td>
+                    <td>${jsonData[0][i].number}</td>
+                    <td>${jsonData[0][i].city}</td>
+                    <td>${jsonData[0][i].url}</td>
                 </tr>`; 
 
             }
+            for(var i=0; i<jsonData[1].length; i++){
+
+              domChange += `<tr>
+                  <th scope="row">${i}</th>
+                  <td>${jsonData[1][i].team_name}</td>
+                  <td>${jsonData[1][i].full_name}</td>
+                  <td>${jsonData[1][i].email}</td>
+                  <td>${jsonData[1][i].number}</td>
+                  <td>${jsonData[1][i].city}</td>
+                  <td>${jsonData[1][i].url}</td>
+              </tr>`; 
+
+              }
             document.getElementById('loader').hidden = true;
 
             // changing JavaScript DOM only one time
@@ -64,7 +77,7 @@
             document.getElementById('table').hidden = false;
             
         }
-
+        
     </script>
 
   </head>

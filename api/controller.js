@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 const ErrorResponse = require('../util/errorResponse');
 const MockOneData = require('./Model/MockOneData');
 const MockSecondData = require('./Model/MockSecondData');
-
+var collectionStats = {};
 // returns MockOne collection documents
 const getMockOneData = (req,res) => {
     MockOneData.find()
@@ -28,31 +28,54 @@ const getMockSecondData = (req,res) => {
 }
 
 // performs JOIN operation on MockOne and MockSecond collection and returns the resulted data
-const getCollectionJoin = (req,res) => {
-    MockOneData.aggregate([{
-         
-            $lookup: {
-                from: "mockseconddatas",
-                localField: "full_name",
-                foreignField: "full_name",
-                as: "full_details"
-            }
+async function getCollectionJoin(req,res){
+
+    const lookup = {
+        from: "mockseconddatas",
+        localField: "full_name",
+        foreignField: "full_name",
+        as: "full_details"
+    };
     
-        },
-        {
-            $replaceRoot: { 
-                newRoot: { 
-                    $mergeObjects: [ { 
-                        $arrayElemAt: [ "$full_details", 0 ] 
-                    }, "$$ROOT" ] } }
-        },
-        { 
-            $project: { full_details: 0 } 
-        }
-    ]).exec((err,data) =>{
-            return res.json(data);
+    const project = { full_details: 0 };
+
+    const firstCall =  new Promise((resolve,reject) => {
+        MockOneData.aggregate([
+
+            { $limit: collectionStats.size/2 },
+            { $lookup: lookup},
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$full_details", 0 ] }, "$$ROOT" ] } }
+            },
+            { $project:  project }
+
+        ]).exec((err,data) =>{
+            resolve(data);
+        });
+                
+    })
+    
+    const secondCall = new Promise((resolve, reject) => {
+        MockOneData.aggregate([
+
+            { $skip: collectionStats.size/2 },
+            { $lookup: lookup},
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$full_details", 0 ] }, "$$ROOT" ] } }
+            },
+            { $project:  project }
+
+        ]).exec((err,data) =>{
+            resolve(data);
+        });
+    
+    })
+        
+        
+    Promise.all([firstCall, secondCall]).then(values => {
+        res.send(values);
     });
-       
+           
 }
 
 // load testing host verification end point
