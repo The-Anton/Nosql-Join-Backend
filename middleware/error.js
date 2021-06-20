@@ -1,4 +1,5 @@
 const ErrorResponse = require('../util/errorResponse');
+// middleware to handle errors
 const errorHandler = (err, req, res, next) => {
     console.log(err);
     let error = {...err};

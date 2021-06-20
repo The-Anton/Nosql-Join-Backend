@@ -1,6 +1,5 @@
 const express = require('express');
 const errorHandler = require('./middleware/error');
-const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv')
 const path = require('path');
 var cors = require('cors')
@@ -20,10 +19,6 @@ const api = require('./api');
 const app = express();
 // Body Parser
 
-app.use(express.json());
-// sanitize Data
-
-app.use(mongoSanitize());
 app.use(cors({
     origin: '*'
 }))

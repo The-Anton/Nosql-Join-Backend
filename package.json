@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+    "start": "pm2-runtime start ./config/ecosystem.config.js --env production"
   },
   "keywords": [
     "NodeJS",
@@ -15,10 +15,11 @@
   ],
   "author": "Shekhar Kumar",
   "license": "ISC",
-  "bugs": {
-    "url": ""
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Anton/Nosql-Join-Backend.git"
   },
-  "homepage": "",
+  "homepage": "https://shekharincubate.herokuapp.com/",
   "dependencies": {
     "colors": "^1.4.0",
     "cors": "^2.8.5",

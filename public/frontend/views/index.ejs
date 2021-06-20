@@ -9,6 +9,7 @@
     <!-- bootstrap files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- CSS -->
     <style>
       .loader {
         text-align: center;
@@ -26,7 +27,11 @@
         100% { transform: rotate(360deg); }
       }
     </style>
+
+    <!-- Script -->
+
     <script>
+      // fetch and parse collection JOIN json data
         async function getDetails() {
             document.getElementById('loader').hidden = false;
             var response = await fetch('https://shekharincubate.herokuapp.com/api/m1m2join');
@@ -34,7 +39,7 @@
             populateTable(jsonData)
         }
 
-
+      // populate the json data in table and render 
         function populateTable(jsonData) {
             var tableBody = document.getElementById("tableBody");
             var domChange = " ";
@@ -58,8 +63,6 @@
 
             document.getElementById('table').hidden = false;
             
-
-
         }
 
     </script>
@@ -70,7 +73,7 @@
   <div style="text-align: center">
     
     <h1 style="text-align: center" class="m-3">Hello Dev World!!</h1>
-    <button type="button" class="btn btn-primary m-5" onclick="getDetails()">Get Details</button>
+    <button type="button" class="btn btn-primary m-5" onclick="getDetails()">Perform Join</button>
 
   </div>
   <div >
@@ -100,7 +103,7 @@
   </div>
     
 
-
+      <!-- jQuery -->
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
