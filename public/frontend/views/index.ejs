@@ -42,39 +42,56 @@
       // populate the json data in table and render 
       function populateTable(jsonData) {
             var tableBody = document.getElementById("tableBody");
-            var domChange = " ";
-            for(var i=0; i<jsonData[0].length; i++){
+            var domChange1 = " ";
+            var domChange2 = " ";
+            const firstHalfTable = new Promise((resolve,reject) => {
+              for(var i=0; i<jsonData[0].length; i++){
 
-               domChange += `<tr>
-                    <th scope="row">${i}</th>
-                    <td>${jsonData[0][i].team_name}</td>
-                    <td>${jsonData[0][i].full_name}</td>
-                    <td>${jsonData[0][i].email}</td>
-                    <td>${jsonData[0][i].number}</td>
-                    <td>${jsonData[0][i].city}</td>
-                    <td>${jsonData[0][i].url}</td>
-                </tr>`; 
+                  domChange1 += `<tr>
+                      <th scope="row">${i+1}</th>
+                      <td>${jsonData[0][i].team_name}</td>
+                      <td>${jsonData[0][i].full_name}</td>
+                      <td>${jsonData[0][i].email}</td>
+                      <td>${jsonData[0][i].number}</td>
+                      <td>${jsonData[0][i].city}</td>
+                      <td>${jsonData[0][i].url}</td>
+                  </tr>`; 
 
-            }
-            for(var i=0; i<jsonData[1].length; i++){
+                  }
 
-              domChange += `<tr>
-                  <th scope="row">${i}</th>
-                  <td>${jsonData[1][i].team_name}</td>
-                  <td>${jsonData[1][i].full_name}</td>
-                  <td>${jsonData[1][i].email}</td>
-                  <td>${jsonData[1][i].number}</td>
-                  <td>${jsonData[1][i].city}</td>
-                  <td>${jsonData[1][i].url}</td>
-              </tr>`; 
+                  resolve(domChange1)
+            })
+            
+            const secondHalfTable = new Promise((resolve,reject) => {
+            
+              var step = jsonData[0].length
+                for(var i=0; i<jsonData[1].length; i++){
 
-              }
-            document.getElementById('loader').hidden = true;
+                  domChange2 += `<tr>
+                      <th scope="row">${step + i +1}</th>
+                      <td>${jsonData[1][i].team_name}</td>
+                      <td>${jsonData[1][i].full_name}</td>
+                      <td>${jsonData[1][i].email}</td>
+                      <td>${jsonData[1][i].number}</td>
+                      <td>${jsonData[1][i].city}</td>
+                      <td>${jsonData[1][i].url}</td>
+                  </tr>`; 
 
-            // changing JavaScript DOM only one time
-            tableBody.innerHTML += domChange;
+                  }
+                  
+                  resolve(domChange2)
+            })
 
-            document.getElementById('table').hidden = false;
+            Promise.all([firstHalfTable,secondHalfTable]).then((data) =>{
+
+                document.getElementById('loader').hidden = true;
+
+                // changing JavaScript DOM only one time
+                tableBody.innerHTML += data;
+
+                document.getElementById('table').hidden = false;
+            })
+            
             
         }
         
