@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Get the Schema constructor
 var Schema = mongoose.Schema;
 
 const mockOneSchema = new mongoose.Schema({

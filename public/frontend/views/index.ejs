@@ -34,7 +34,7 @@
       // fetch and parse collection JOIN json data
         async function getDetails() {
             document.getElementById('loader').hidden = false;
-            var response = await fetch('https://shekharincubate.herokuapp.com/api/m1m2join');
+            var response = await fetch(window.location.href + 'api/join');
             var  jsonData = await response.json();
             populateTable(jsonData)
         }

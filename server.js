@@ -17,7 +17,7 @@ require('colors');
 // route files
 const api = require('./api');
 const app = express();
-// Body Parser
+
 
 app.use(cors({
     origin: '*'

@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 const ErrorResponse = require('../util/errorResponse');
+const asyncHandler = require('../middleware/async');
 const MockOneData = require('./Model/MockOneData');
 const MockSecondData = require('./Model/MockSecondData');
 var collectionStats = {};
 
+// Get the size of collection
 MockOneData.estimatedDocumentCount({},util);
 
 function util(err,result){
@@ -11,30 +13,31 @@ function util(err,result){
 }
 
 // returns MockOne collection documents
-const getMockOneData = (req,res) => {
+const getMockOneData = asyncHandler(async  (req,res) => {
     MockOneData.find()
         .then((result) => {
-            res.json(result);
+            res.status(200).json({
+                success: true,
+                data: result
+            });
         })
-        .catch((error) => {
-            console.log(error);
-        });
     
-}
+});
 
 // returns MockSecond collection documents
 const getMockSecondData = (req,res) => {
     MockSecondData.find()
         .then((result) => {
-            res.send(result);
+            res.status(200).json({
+                success: true,
+                data: result
+            });
         })
-        .catch((error) => {
-            console.log(error);
-        });
     
 }
 
-// performs JOIN operation on MockOne and MockSecond collection and returns the resulted data
+// performs JOIN operation on MockOne and MockSecond collection 
+// and returns the resulted data
 async function getCollectionJoin(req,res){
 
     const lookup = {
@@ -46,6 +49,8 @@ async function getCollectionJoin(req,res){
     
     const project = { full_details: 0 };
 
+    // 1st parallel promise to 
+    // perform JOIN on half documents of collection
     const firstCall =  new Promise((resolve,reject) => {
         MockOneData.aggregate([
 
@@ -62,6 +67,8 @@ async function getCollectionJoin(req,res){
                 
     })
     
+    // 2nd parallel promise to 
+    // perform JOIN on next half documents of collection
     const secondCall = new Promise((resolve, reject) => {
         MockOneData.aggregate([
 
@@ -80,14 +87,14 @@ async function getCollectionJoin(req,res){
         
         
     Promise.all([firstCall, secondCall]).then(values => {
-        res.send(values);
+        res.status(200).send(values);
     });
            
 }
 
 // load testing host verification end point
 const verify = (req,res) => {
-    res.download('./loaderio-77c7d9dc9cfa4028a37169d8f2f88462.txt');
+    res.status(200).download('./loaderio-77c7d9dc9cfa4028a37169d8f2f88462.txt');
 }
 
 

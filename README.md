@@ -5,9 +5,9 @@ This is a basic application of Backend Server using NodeJS and Express connected
 ## API Endpoints
 
     
-    /api/m1data      // returns 1st collection documents.
-    /api/m2data      // returns 2nd collection documents.
-    /api/m1m2join    // returns JOIN of 1st and 2nd Collection.
+    /api/mock1data      // returns 1st collection documents.
+    /api/mock2data      // returns 2nd collection documents.
+    /api/join           // returns JOIN of 1st and 2nd Collection.
 
 
     
