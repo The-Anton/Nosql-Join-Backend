@@ -3,6 +3,13 @@ const ErrorResponse = require('../util/errorResponse');
 const MockOneData = require('./Model/MockOneData');
 const MockSecondData = require('./Model/MockSecondData');
 var collectionStats = {};
+
+MockOneData.estimatedDocumentCount({},util);
+
+function util(err,result){
+    collectionStats.size = result;
+}
+
 // returns MockOne collection documents
 const getMockOneData = (req,res) => {
     MockOneData.find()
