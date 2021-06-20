@@ -9,5 +9,6 @@ const mockSecondSchema = new mongoose.Schema({
     team_name :  { type: String, require: true }
 });
 
+mockSecondSchema.index({ full_name: 1 }, { unique: true })
 
 module.exports = mongoose.model('MockSecondData', mockSecondSchema);

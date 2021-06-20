@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 const ErrorResponse = require('../util/errorResponse');
-//const asyncHandler = require('../middleware/async');
 const MockOneData = require('./Model/MockOneData');
 const MockSecondData = require('./Model/MockSecondData');
 
-
+// returns MockOne collection documents
 const getMockOneData = (req,res) => {
     MockOneData.find()
         .then((result) => {
@@ -16,6 +15,7 @@ const getMockOneData = (req,res) => {
     
 }
 
+// returns MockSecond collection documents
 const getMockSecondData = (req,res) => {
     MockSecondData.find()
         .then((result) => {
@@ -27,7 +27,7 @@ const getMockSecondData = (req,res) => {
     
 }
 
-
+// performs JOIN operation on MockOne and MockSecond collection and returns the resulted data
 const getCollectionJoin = (req,res) => {
     MockOneData.aggregate([{
          
@@ -55,7 +55,7 @@ const getCollectionJoin = (req,res) => {
        
 }
 
-
+// load testing host verification end point
 const verify = (req,res) => {
     res.download('./loaderio-77c7d9dc9cfa4028a37169d8f2f88462.txt');
 }

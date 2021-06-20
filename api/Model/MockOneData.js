@@ -11,5 +11,6 @@ const mockOneSchema = new mongoose.Schema({
     url:  { type: String, require: true }
 });
 
+mockOneSchema.index({ full_name: 1 }, { unique: true })
 
 module.exports = mongoose.model('MockOneData', mockOneSchema);
